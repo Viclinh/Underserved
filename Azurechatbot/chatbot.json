@@ -1,0 +1,65 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "botServices_Underserved_name": {
+            "defaultValue": "Underserved",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.BotService/botServices",
+            "apiVersion": "2022-06-15-preview",
+            "name": "[parameters('botServices_Underserved_name')]",
+            "location": "global",
+            "tags": {
+                "webapp": "underserved.azurewebsites.net"
+            },
+            "sku": {
+                "name": "F0"
+            },
+            "kind": "azurebot",
+            "properties": {
+                "displayName": "[parameters('botServices_Underserved_name')]",
+                "iconUrl": "https://docs.botframework.com/static/devportal/client/images/bot-framework-default.png",
+                "endpoint": "https://underserved.azurewebsites.net/api/messages",
+                "msaAppId": "586b0e62-f2f0-4fc5-8c34-c909be57e7fd",
+                "developerAppInsightKey": "51ab5f21-41dd-43b4-9048-c53ecca235f5",
+                "developerAppInsightsApplicationId": "80e24d57-094c-4631-9311-4f241a7bd397",
+                "luisAppIds": [],
+                "isStreamingSupported": false,
+                "schemaTransformationVersion": "1.3",
+                "tenantId": "03363749-29d6-4915-933a-8a647804605d",
+                "isCmekEnabled": false,
+                "openWithHint": "bfcomposer://",
+                "disableLocalAuth": false
+            }
+        },
+        {
+            "type": "Microsoft.BotService/botServices/channels",
+            "apiVersion": "2022-06-15-preview",
+            "name": "[concat(parameters('botServices_Underserved_name'), '/WebChatChannel')]",
+            "location": "global",
+            "dependsOn": [
+                "[resourceId('Microsoft.BotService/botServices', parameters('botServices_Underserved_name'))]"
+            ],
+            "properties": {
+                "properties": {
+                    "sites": [
+                        {
+                            "siteName": "Default Site",
+                            "isEnabled": true,
+                            "isWebchatPreviewEnabled": true,
+                            "isBlockUserUploadEnabled": false
+                        }
+                    ]
+                },
+                "etag": "W/\"1ebdeef65500425de192bc3a6d69dbe712/5/2022 3:10:22 AM\"",
+                "channelName": "WebChatChannel",
+                "location": "global"
+            }
+        }
+    ]
+}

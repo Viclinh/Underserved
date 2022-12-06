@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@nestjs/azure-database": ["src/table-storage"],
+      "@nestjs/azure-database/*": ["src/table-storage/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

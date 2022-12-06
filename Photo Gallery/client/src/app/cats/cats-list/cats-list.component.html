@@ -1,0 +1,39 @@
+<div
+  class="container"
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50"
+  infiniteScrollContainer=".mat-sidenav-content"
+  [fromRoot]="true"
+  (scrolled)="loadMore()"
+>
+  <ng-masonry-grid
+    [masonryOptions]="{
+      transitionDuration: '0.4s',
+      gutter: 0,
+      columnWidth: '.sizer',
+      percentPosition: true,
+      hiddenStyle: { opacity: 0 },
+      visibleStyle: { opacity: 1 }
+    }"
+    [useAnimation]="false"
+    [useImagesLoaded]="true"
+  >
+    <div class="sizer"></div>
+    <ng-masonry-grid-item *ngFor="let cat of cats">
+      <nc-cat-item [cat]="cat" (deleted)="onDeleteCat($event)"></nc-cat-item>
+    </ng-masonry-grid-item>
+  </ng-masonry-grid>
+  <div *ngIf="loading" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner [diameter]="64"></mat-spinner>
+    <p>
+      Loading photos...
+    </p>
+  </div>
+  <div *ngIf="loadError" fxLayoutAlign="center center">
+    Oops, cannot load photos! 
+  </div>
+  <div *ngIf="!loading && cats.length === 0" fxLayoutAlign="center center">
+    No photos to display! 
+  </div>
+</div>

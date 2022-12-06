@@ -1,0 +1,6 @@
+{
+  "id": "{{params.id}}",
+  "createdAt": "2019-09-10T12:29:07.835Z",
+  "rating": 3,
+  "url": "/api/cat1.jpg"
+}

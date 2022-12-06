@@ -1,0 +1,70 @@
+<div fxFlex (ncAdmin)="enableAdminMode()">
+  <mat-sidenav-container fxFill>
+    <mat-sidenav #sidenav mode="over" ngClass.gt-sm="has-border">
+      <nav>
+        <mat-list>
+          <mat-divider></mat-divider>
+          <a
+            mat-list-item
+            routerLink="/latest"
+            routerLinkActive="active"
+            (click)="sidenav.close()"
+          >
+            <span>Latest</span>
+          </a>
+          <mat-divider></mat-divider>
+          <a
+            mat-list-item
+            routerLink="/top"
+            routerLinkActive="active"
+            (click)="sidenav.close()"
+          >
+            <span>Top rated</span>
+          </a>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </nav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar class="mat-elevation-z6 navbar" color="primary">
+        <div class="container">
+          <div fxLayoutAlign="start center">
+            <button
+              fxHide.gt-sm
+              class="menu-button"
+              mat-icon-button
+              (click)="sidenav.toggle()"
+            >
+              <mat-icon>menu</mat-icon>
+            </button>
+            <img class="logo" alt="nitro cat logo" src="/assets/Underserved.png" />
+            <span fxHide.lt-sm class="brand">
+              Underserved
+            </span>
+            <div fxFlex fxHide.gt-xs></div>
+            <button
+              fxHide.lt-md
+              mat-button
+              routerLink="/latest"
+              routerLinkActive="active"
+            >
+              <span>Latest</span>
+            </button>
+            <button
+              fxHide.lt-md
+              mat-button
+              routerLink="/top"
+              routerLinkActive="active"
+            >
+              <span>Top rated</span>
+            </button>
+            <button mat-button routerLink="/submit" routerLinkActive="active">
+              <span>Submit</span>
+            </button>
+          </div>
+        </div>
+      </mat-toolbar>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
